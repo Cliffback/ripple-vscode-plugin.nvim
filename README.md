@@ -14,7 +14,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 And wherever you setup your lsp:
 ```lua
-require('ripple_lsp').setup({
+require('ripple-lsp').setup({
   on_attach = on_attach_keymaps
 })
 ```
