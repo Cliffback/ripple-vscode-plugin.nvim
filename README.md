@@ -8,9 +8,16 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
-  "your-username/ripple-lsp.nvim",
-  config = function()
-    require("ripple-lsp").setup()
-  end,
+  "Cliffback/ripple-vscode-plugin.nvim",
 }
+```
+
+And wherever you setup your lsp:
+```lua
+require('ripple_lsp').setup({
+  on_attach = on_attach_keymaps
+})
+```
+
+
 
