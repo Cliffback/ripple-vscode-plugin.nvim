@@ -1,5 +1,11 @@
 local M = {}
 
+-- Default on_attach function using your keymaps
+local function default_on_attach(client, bufnr)
+	local keymaps = require("keymaps")
+	keymaps.set_lsp_keymaps(client, bufnr)
+end
+
 local fn = vim.fn
 
 local data_dir = fn.stdpath("data") .. "/ripple-lsp"
@@ -197,6 +203,10 @@ function M.setup(opts)
 		typescript = { tsdk = project_root .. "/node_modules/typescript/lib" },
 	}
 
+	if not opts.on_attach then
+		opts.on_attach = default_on_attach
+	end
+
 	-- -- Required inputs
 	-- assert(opts.cmd and opts.cmd[1], "[ripple_lsp] opts.cmd is required")
 	-- assert(opts.init_options
@@ -205,9 +215,9 @@ function M.setup(opts)
 	--   and opts.init_options.typescript.tsdk,
 	--   "[ripple_lsp] opts.init_options.ripplePath and .typescript.tsdk are required")
 	--
-	local server_name  = opts.server_name or "ripple"
-	local ts_lang      = (opts.treesitter_lang == nil) and "tsx" or opts.treesitter_lang
-	local set_ft       = (opts.set_filetype ~= false)
+	local server_name = opts.server_name or "ripple"
+	local ts_lang     = (opts.treesitter_lang == nil) and "tsx" or opts.treesitter_lang
+	local set_ft      = (opts.set_filetype ~= false)
 
 	-- 1) Filetype + Tree-sitter alias (optional)
 	if set_ft then

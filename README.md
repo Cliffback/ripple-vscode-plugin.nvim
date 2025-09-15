@@ -9,15 +9,15 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 ```lua
 {
   "Cliffback/ripple-vscode-plugin.nvim",
+  config = function()
+    require("ripple-lsp").setup(
+      {
+        -- optional overrides
+        -- on_attach = function(client, bufnr) ... end
+        -- treesitter_lang = 'tsx',
+        -- set_filetype = true,
+      }
+    )
+  end,
 }
 ```
-
-And wherever you setup your lsp:
-```lua
-require('ripple-lsp').setup({
-  on_attach = on_attach_keymaps
-})
-```
-
-
-
